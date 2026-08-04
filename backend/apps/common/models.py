@@ -1,0 +1,12 @@
+"""Abstract base models reused across every app to avoid duplicated fields."""
+from django.db import models
+
+
+class TimeStampedModel(models.Model):
+    """Adds self-managed created_at / updated_at timestamps to a model."""
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
