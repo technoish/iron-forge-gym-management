@@ -85,7 +85,7 @@ class Command(BaseCommand):
                 title=s['title'],
                 defaults=dict(description=s['description'], icon=s['icon'], is_active=True),
             )
-            if created and fetch_images:
+            if fetch_images and not obj.image:
                 self.attach_image(obj, 'image', f"https://picsum.photos/seed/{s['seed']}/800/600", f"{s['seed']}.jpg")
                 obj.save()
             self.stdout.write(f'  {"created" if created else "exists"}: {obj.title}')
@@ -134,7 +134,7 @@ class Command(BaseCommand):
                     facebook=t['facebook'], linkedin=t['linkedin'], is_active=True,
                 ),
             )
-            if created and fetch_images:
+            if fetch_images and not obj.image:
                 slug = t['name'].lower().replace(' ', '-')
                 self.attach_image(obj, 'image', f"https://i.pravatar.cc/400?img={t['avatar']}", f"{slug}.jpg")
                 obj.save()
@@ -184,7 +184,7 @@ class Command(BaseCommand):
                 customer_name=t['customer_name'],
                 defaults=dict(rating=t['rating'], review=t['review'], is_active=True),
             )
-            if created and fetch_images:
+            if fetch_images and not obj.image:
                 slug = t['customer_name'].lower().replace(' ', '-')
                 self.attach_image(obj, 'image', f"https://i.pravatar.cc/300?img={t['avatar']}", f"{slug}.jpg")
                 obj.save()
